@@ -10,6 +10,12 @@ namespace Leetcode
     {
         public ArraysHashing()
         {
+            Console.WriteLine("\n 1. Two Sum");            
+            Console.WriteLine(String.Join(",", TwoSum(new int[] { 2, 7, 11, 15 }, 9) ) );
+            Console.WriteLine(String.Join(",", TwoSum(new int[] { 3, 2, 4 }, 6)));
+            Console.WriteLine(String.Join(",", TwoSum(new int[] { 3, 3 }, 6)));
+            Console.WriteLine(String.Join(",", TwoSum(new int[] { 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1 }, 11)));
+
             Console.WriteLine("\n 242.Valid Anagram");
             Console.WriteLine(IsAnagram("anagram", "nagaram"));
             Console.WriteLine(IsAnagram("rat", "car"));
@@ -18,6 +24,29 @@ namespace Leetcode
             Console.WriteLine(ContainsDuplicate(new int[] { 1, 2, 3, 1 }));
             Console.WriteLine(ContainsDuplicate(new int[] { 1, 2, 3, 4 }));
             Console.WriteLine(ContainsDuplicate( new int[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 } ) );
+        }
+
+        // Easy Problems
+
+        // 1. Two Sum
+        // Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+        public int[] TwoSum(int[] nums, int target)
+        {
+            Dictionary<int, int> answers = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++) 
+            {
+                // Pre-calculate the 2nd pairing number and store it with the current index
+                // When we eventually run into that 2nd number, we already stored the 
+                // index of the 1st number to go with it
+                int diff = target - nums[i];
+                if (answers.ContainsKey(nums[i]))
+                {
+                    return new int[] { answers[nums[i]], i };
+                }
+                answers[diff] = i;
+            }
+            Console.WriteLine("No pair found");
+            return new int[] { };
         }
 
         // 242.Valid Anagram
